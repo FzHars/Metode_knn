@@ -15,7 +15,7 @@ include'header.php';
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th class="text-center">No</th>
+                        <th class="text-center">Kode Alternatif</th>
                         <th class="text-center">Nama Alternatif</th>
                         <th class="text-center">Training</th>
                         <th class="text-center">Opsi</th>
@@ -24,13 +24,12 @@ include'header.php';
                     <tbody>
                         <?php
                          $con=mysqli_connect("localhost","root","","metode_knn");
-                         $data=mysqli_query($con,"SELECT * FROM tbl_alternatif order by kode_alternatif asc
-                           ");
+                         $data=mysqli_query($con,"SELECT * FROM tbl_alternatif order by kode_alternatif asc");
                         $no=1;
-                        while ($a mysqli_fetch_array($data, MYSQLI_ASSOC)) {
+                        while ($a=mysqli_fetch_array($data)) {
                              ?>
                              <tr>
-                                <td class="text-center"><?php echo $no++ ?></td>
+                                <td class="text-center"><?php echo $no++; ?></td>
                                 <td class="text-center"><?php echo $a['nama_alternatif']?></td>
 
                                 <td class="text-center">
@@ -40,7 +39,7 @@ include'header.php';
 
                                 <td class="text-center">
                                     <a href="alternatifaksi.php?kode_alternatif=<?php echo  $a['
-                                    kode_alternatif'] ?>&aksi=ubah" class="btn btn-sucess">Ubah</a>
+                                    kode_alternatif'] ?>&aksi=ubah" class="btn btn-success">Ubah</a>
 
                                      <a href="alternatifproses.php?kode_alternatif=<?php echo  $a['
                                     kode_alternatif'] ?>&proses=proseshapus" class="btn btn-danger">Hapus</a>

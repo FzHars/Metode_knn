@@ -5,12 +5,12 @@ if (isset($_GET['aksi'])) {
 
       <div class="container">
           <div class="row">
-              <ol class="breadcrumb"><h4>ALTERNATIF/ TAMBAH DATA</h4> </ol>
+              <ol class="breadcrumb"><h4>ALTERNATIF / TAMBAH DATA</h4> </ol>
           </div>
-
           <?php 
-          $carikode=mysql-query("SELECT max(kode_alternatif) FROM tbl_alternatif");
-          $datakode = mysql_fetch_array($carikode);
+          $con=mysqli_connect("localhost","root","","metode_knn");
+          $carikode=mysqli_query($con,"SELECT max(kode_alternatif) FROM tbl_alternatif");
+          $datakode=mysqli_fetch_array($carikode);
           if ($datakode) {
             $nilaikode = substr($datakode[0], 1);
             $kode = (int) $nilaikode;
@@ -24,12 +24,14 @@ if (isset($_GET['aksi'])) {
           <div class="panel panel-container">
               <div class="bootstrap-table">
                 
-                <form action="alternatifproses.php?proses=prosestambah" method="post" enctype="
-                multipart/from-data">
+                <form action="alternatifproses.php?proses=prosestambah" method="post" enctype="multipart/from-data">
 
+            <div class="from-group">
+            <label>Kode Alternatif</label>
                 <input type="text" name="kode_alternatif" class="from-control" value="<?php //kalo sudah muncul datanya text diganti hiden
-                   echo $kode_otomatis ?>">
+                  echo $kode_otomatis ?>">
 
+            </div>
             <div class="from-group">
                 <label>Nama Alternatif</label>
                 <input type="text" name="nama_alternatif" class="from-control" placeholder="nama alternatif">   
@@ -44,18 +46,19 @@ if (isset($_GET['aksi'])) {
               </div>
          </div>
      </div>
-     <?php }elseif ($_GET['aksi']=='ubah'){ ?>
+     <?php }else if ($_GET['aksi']=='ubah'){ ?>
 
         <div class="container">
           <div class="row">
-              <ol class="breadcrumb"><h4>ALTERNATIF/ UBAH DATA</h4> </ol>
+              <ol class="breadcrumb"><h4>ALTERNATIF / UBAH DATA</h4> </ol>
           </div>
 
           <div class="panel panel-container">
               <div class="bootstrap-table">
                 <?php 
-                $data=mysql_query("SELECT * FROM tbl_alternatif WHERE kode_alternatif='$-GET[kode_alternatif]'");
-                while ($a=mysql_fetch_array($data)) {
+                $con=mysqli_connect("localhost","root","","metode_knn");
+                $data=mysqli_query($con,"SELECT * FROM tbl_alternatif WHERE kode_alternatif='$-GET[kode_alternatif]'");
+                while ($a=mysqli_fetch_array($data)) {
                     ?>
 
                 <form action="alternatifproses.php?proses=prosesubah" method="post" enctype="                          
@@ -68,7 +71,7 @@ if (isset($_GET['aksi'])) {
                 <label>Nama Alternatif</label>
                 <input type="text" name="nama_alternatif" class="from-control" placeholder="nama alternatif" 
                 value="<?php echo $a['nama_alternatif'] ?>">
->   
+   
             </div>
 
             <div class="modal-footer">
